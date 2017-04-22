@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 2.6.4)
 
-project (gtest_exe)
+set( project_name gtest_exe)
+project (${project_name})
 
 file(GLOB SRC *.cpp)
 
@@ -20,7 +21,7 @@ endforeach(flag_var)
 
 link_directories(${PROJECT_BINARY_DIR}/googletest/googlemock/gtest)
 link_directories(${PROJECT_BINARY_DIR}/src)
-add_executable(gtest_exe ${SRC})
-target_link_libraries(gtest_exe gtest)
-target_link_libraries(gtest_exe gtest_main)
-target_link_libraries(gtest_exe calc)
+add_executable(${project_name} ${SRC})
+target_link_libraries(${project_name} gtest)
+target_link_libraries(${project_name} gtest_main)
+target_link_libraries(${project_name} calc)
