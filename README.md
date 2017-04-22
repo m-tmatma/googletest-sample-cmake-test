@@ -20,7 +20,7 @@ $ mkdir build-gtest-cmake
 
 $ cd    build-gtest-cmake
 
-$ cmake -G "Xcode" ..\gtest-cmake
+$ cmake -G "Xcode" ../gtest-cmake
 
 # How to create CMakeLists.txt which is project file for cmake
 
