@@ -5,7 +5,13 @@ class DivideByZeroException : public std::exception
 {
 public:
 	explicit DivideByZeroException(const char* message)
-		: std::exception(message) {}
+#ifdef _MSC_VER
+		: std::exception(message)
+#else
+        : std::exception()
+#endif
+    {
+    }
 };
 
 class Calc
