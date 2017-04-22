@@ -6,7 +6,7 @@ class DivideByZeroException : public std::exception
 public:
 	explicit DivideByZeroException(const char* message)
 #ifdef _MSC_VER
-		: std::exception(message)
+        : std::exception(message)
 #else
         : std::exception()
 #endif
