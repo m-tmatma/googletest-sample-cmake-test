@@ -14,9 +14,9 @@ add_subdirectory(tests)
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 # create solution folder
-set_target_properties(gmock       PROPERTIES FOLDER GoogleTests)
-set_target_properties(gmock_main  PROPERTIES FOLDER GoogleTests)
-set_target_properties(gtest       PROPERTIES FOLDER GoogleTests)
-set_target_properties(gtest_main  PROPERTIES FOLDER GoogleTests)
+set_target_properties(gmock       PROPERTIES FOLDER GoogleTest)
+set_target_properties(gmock_main  PROPERTIES FOLDER GoogleTest)
+set_target_properties(gtest       PROPERTIES FOLDER GoogleTest)
+set_target_properties(gtest_main  PROPERTIES FOLDER GoogleTest)
 set_target_properties(calc        PROPERTIES FOLDER library)
 set_target_properties(gtest_exe   PROPERTIES FOLDER executable)
