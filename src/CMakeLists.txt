@@ -5,6 +5,6 @@ set( project_name calc)
 
 project (${project_name})
 
-file(GLOB SRC *.cpp)
+file(GLOB SRC *.cpp *.h)
 
 ADD_LIBRARY(${project_name} STATIC ${SRC})

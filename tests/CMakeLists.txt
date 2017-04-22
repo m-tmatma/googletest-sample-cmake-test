@@ -4,7 +4,7 @@ include (../runtime.cmake)
 set( project_name gtest_exe)
 project (${project_name})
 
-file(GLOB SRC *.cpp)
+file(GLOB SRC *.cpp *.h)
 
 include_directories(../googletest/googletest/include)
 include_directories(../src)
