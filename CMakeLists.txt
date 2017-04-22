@@ -4,6 +4,7 @@ project (gtest-cmake)
 
 set(BUILD_SHARED_LIBS OFF)
 option(BUILD_SHARED_LIBS "Build shared libraries (DLLs)." OFF)
+set_property( DIRECTORY PROPERTY VS_STARTUP_PROJECT "gtest_exe" )
 
 add_subdirectory(googletest)
 add_subdirectory(src)
