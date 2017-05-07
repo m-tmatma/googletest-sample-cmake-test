@@ -19,7 +19,7 @@ or
 
 \> cd    build-gtest-cmake
 
-\> cmake -G "Visual Studio 15 2017" ..\gtest-cmake
+\> cmake -G "Visual Studio 15 2017" ..\googletest-sample-cmake
 
 ## How to generate projects for Xcode
 
@@ -27,7 +27,7 @@ $ mkdir build-gtest-cmake
 
 $ cd    build-gtest-cmake
 
-$ cmake -G "Xcode" ../gtest-cmake
+$ cmake -G "Xcode" ../googletest-sample-cmake
 
 # How to create CMakeLists.txt which is project file for cmake
 
