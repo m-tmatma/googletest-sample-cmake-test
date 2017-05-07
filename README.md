@@ -6,6 +6,13 @@ This is an example for using GoogleTest and cmake
 
 > git clone --recursive https://github.com/m-tmatma/googletest-sample-cmake.git
 
+or
+
+> git clone https://github.com/m-tmatma/googletest-sample-cmake.git  
+> cd googletest-sample-cmake  
+> git submodule init  
+> git submodule update  
+
 ## How to generate projects for Visual Studio
 
 \> mkdir build-gtest-cmake
