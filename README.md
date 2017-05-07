@@ -1,4 +1,4 @@
-# gtest-cmake
+# googletest-sample-cmake
 
 This is an example for using GoogleTest and cmake
 
