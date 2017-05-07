@@ -4,7 +4,7 @@ This is an example for using GoogleTest and cmake
 
 ## How to get this ##
 
-> git clone --recursive https://github.com/m-tmatma/gtest-cmake.git
+> git clone --recursive https://github.com/m-tmatma/googletest-sample-cmake.git
 
 ## How to generate projects for Visual Studio
 
