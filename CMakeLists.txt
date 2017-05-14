@@ -3,6 +3,9 @@ cmake_minimum_required(VERSION 3.6)
 project (googletest-sample-cmake)
 
 option(BUILD_SHARED_LIBS "Build shared libraries (DLLs)." OFF)
+if (APPLE)
+  set(CMAKE_MACOSX_RPATH 1)
+endif(APPLE)
 
 # switch DLL or static libary by specifying by command line
 set (LIB_TYPE STATIC)
