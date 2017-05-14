@@ -3,31 +3,26 @@
 This is an example for using GoogleTest and cmake
 
 ## How to get this ##
-
-> git clone --recursive https://github.com/m-tmatma/googletest-sample-cmake.git
+    > git clone --recursive https://github.com/m-tmatma/googletest-sample-cmake.git
 
 or
 
-> git clone https://github.com/m-tmatma/googletest-sample-cmake.git  
-> cd googletest-sample-cmake  
-> git submodule init  
-> git submodule update  
+    > git clone https://github.com/m-tmatma/googletest-sample-cmake.git  
+    > cd googletest-sample-cmake  
+    > git submodule init  
+    > git submodule update  
 
 ## How to generate projects for Visual Studio
 
-\> mkdir build-gtest-cmake
-
-\> cd    build-gtest-cmake
-
-\> cmake -G "Visual Studio 15 2017" ..\googletest-sample-cmake
+    > mkdir build-gtest-cmake
+    > cd    build-gtest-cmake
+    > cmake -G "Visual Studio 15 2017" ..\googletest-sample-cmake
 
 ## How to generate projects for Xcode
 
-$ mkdir build-gtest-cmake
-
-$ cd    build-gtest-cmake
-
-$ cmake -G "Xcode" ../googletest-sample-cmake
+    $ mkdir build-gtest-cmake
+    $ cd    build-gtest-cmake
+    $ cmake -G "Xcode" ../googletest-sample-cmake
 
 # How to create CMakeLists.txt which is project file for cmake
 
