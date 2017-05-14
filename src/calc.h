@@ -1,5 +1,6 @@
 #include <string>
 #include <exception>
+#include "calc_Export.h"
 
 class DivideByZeroException : public std::exception
 {
@@ -14,7 +15,7 @@ public:
     }
 };
 
-class Calc
+class calc_EXPORT Calc
 {
 public:
 	int Add(int a, int b);
