@@ -1,5 +1,7 @@
 # googletest-sample-cmake
 
+[![Build status](https://ci.appveyor.com/api/projects/status/1db5gf9jtf4s3tkc/branch/master?svg=true)](https://ci.appveyor.com/project/MasaruTsuchiyama/googletest-sample-cmake/branch/master)
+
 This is an example for using GoogleTest and cmake
 
 ## How to get this ##
