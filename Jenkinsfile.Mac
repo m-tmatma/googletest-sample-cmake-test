@@ -30,6 +30,7 @@ pipeline  {
 					sh ("mkdir ${BUILD_DIR}")
 					sh ("${cmake} -D BUILD_SHARED_LIBS=1 -B${WORKSPACE}/${BUILD_DIR} -H.")
 					sh ("${make} -j 4 -C ${WORKSPACE}/${BUILD_DIR}")
+					sh ("${WORKSPACE}/${BUILD_DIR}/bin/tests")
 				}
 			}
 		}
@@ -43,6 +44,7 @@ pipeline  {
 					sh ("mkdir ${BUILD_DIR}")
 					sh ("${cmake} -D BUILD_SHARED_LIBS=0 -B${WORKSPACE}/${BUILD_DIR} -H.")
 					sh ("${make} -j 4 -C ${WORKSPACE}/${BUILD_DIR}")
+					sh ("${WORKSPACE}/${BUILD_DIR}/bin/tests")
 				}
 			}
 		}
