@@ -1,0 +1,92 @@
+#!/usr/bin/env groovy
+
+pipeline  {
+	environment {
+		nuget = 'C:/Program Files (x86)/NuGet/nuget.exe'
+		cmake = 'C:/Program Files/CMake/bin/cmake.exe'
+		vcvarsall = 'C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Auxiliary/Build/vcvarsall.bat'
+		devenv = 'C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/Common7/IDE/devenv.com'
+	}
+	agent any
+	stages {
+		stage('Checkout') {
+			steps {
+				checkout scm
+				bat 'git submodule update --init'
+				
+				script {
+					def commitHash = "${GIT_COMMIT}"
+					def branchName = "${GIT_BRANCH}"
+					def shortHash = commitHash.take(8)
+					currentBuild.displayName = "#${BUILD_NUMBER}-${branchName}-${shortHash}"
+				}
+			}
+		}
+		stage('setup') {
+			steps {
+				script {
+				    bat ("call \"%vcvarsall%\" x86")
+				    bat ("cd /d ${env.WORKSPACE}")
+			    }
+			}
+		}
+		stage('Build-on') {
+			steps {
+				script {
+				    def	BUILD_DIR = "${env.WORKSPACE}\\build-on"
+				    bat ("echo ${BUILD_DIR}")
+				    bat ("cd")
+				    bat ("if exist ${BUILD_DIR} rmdir /s /q ${BUILD_DIR}")
+				    bat ("mkdir ${BUILD_DIR}")
+				    bat ("\"%cmake%\" -D BUILD_SHARED_LIBS=1 -B${BUILD_DIR} -H.")
+				    bat ("\"%devenv%\" ${BUILD_DIR}\\googletest-sample-cmake.sln /rebuild \"Release|Win32\"")
+			    }
+			}
+		}
+		stage('Test-on') {
+			steps {
+				script {
+				    def	BUILD_DIR = "${env.WORKSPACE}\\build-on"
+				    bat ("${BUILD_DIR}\\bin\\Release\\tests.exe")
+                }
+			}
+		}
+		stage('Archive-on') {
+			steps {
+				script {
+				    archiveArtifacts artifacts: "build-on/bin/Release/*.dll"
+				    archiveArtifacts artifacts: "build-on/bin/Release/*.exe"
+                }
+			}
+		}
+		
+		stage('Build-off') {
+			steps {
+				script {
+				    def	BUILD_DIR = "${env.WORKSPACE}\\build-off"
+				    bat ("echo ${BUILD_DIR}")
+				    bat ("cd")
+				    bat ("if exist ${BUILD_DIR} rmdir /s /q ${BUILD_DIR}")
+				    bat ("mkdir ${BUILD_DIR}")
+				    bat ("\"%cmake%\" -D BUILD_SHARED_LIBS=0 -B${BUILD_DIR} -H.")
+				    bat ("\"%devenv%\" ${BUILD_DIR}\\googletest-sample-cmake.sln /rebuild \"Release|Win32\"")
+			    }
+			}
+		}
+		stage('Test-off') {
+			steps {
+				script {
+				    def	BUILD_DIR = "${env.WORKSPACE}\\build-off"
+				    bat ("${BUILD_DIR}\\bin\\Release\\tests.exe")
+                }
+			}
+		}
+		stage('Archive-off') {
+			steps {
+				script {
+				    archiveArtifacts artifacts: "build-off/bin/Release/*.exe"
+                }
+			}
+		}
+	}
+}
