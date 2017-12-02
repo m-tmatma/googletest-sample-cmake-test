@@ -26,6 +26,11 @@ add_executable(${project_name} ${SRC})
 if (BUILD_SHARED_LIBS)
   # fix linker error "class testing::internal::Mutex testing::internal::g_linked_ptr_mutex"
   target_compile_definitions(${project_name} PUBLIC -DGTEST_LINKED_AS_SHARED_LIBRARY=1)
+
+  # suppress warning
+  if (MSVC)
+    target_compile_options(${project_name}   PUBLIC /wd4251 PUBLIC /wd4275)
+  endif(MSVC)
 endif (BUILD_SHARED_LIBS)
 
 # link libraries
