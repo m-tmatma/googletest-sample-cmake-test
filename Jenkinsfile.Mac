@@ -1,0 +1,52 @@
+#!/usr/bin/env groovy
+
+pipeline  {
+	environment {
+		make = '/usr/bin/make'
+		cmake = '/Applications/CMake.app/Contents/bin/cmake'
+	}
+	agent any
+	stages {
+		stage('Checkout') {
+			steps {
+				checkout scm
+				sh 'git submodule update --init'
+				
+				script {
+					def commitHash = "${GIT_COMMIT}"
+					def branchName = "${GIT_BRANCH}"
+					def shortHash = commitHash.take(8)
+					currentBuild.displayName = "#${BUILD_NUMBER}-${branchName}-${shortHash}"
+				}
+			}
+		}
+		stage('Build-on') {
+			steps {
+				script {
+					def BUILD_DIR = 'build-on'
+					dir("${BUILD_DIR}") {
+						deleteDir()
+					}
+					sh ("mkdir ${BUILD_DIR}")
+					sh ("${cmake} -D BUILD_SHARED_LIBS=1 -B${WORKSPACE}/${BUILD_DIR} -H.")
+					sh ("${make} -j 4 -C ${WORKSPACE}/${BUILD_DIR}")
+					sh ("${WORKSPACE}/${BUILD_DIR}/bin/tests")
+				}
+			}
+		}
+		stage('Build-off') {
+			steps {
+				script {
+					def BUILD_DIR = 'build-off'
+					dir("${BUILD_DIR}") {
+						deleteDir()
+					}
+					sh ("mkdir ${BUILD_DIR}")
+					sh ("${cmake} -D BUILD_SHARED_LIBS=0 -B${WORKSPACE}/${BUILD_DIR} -H.")
+					sh ("${make} -j 4 -C ${WORKSPACE}/${BUILD_DIR}")
+					sh ("${WORKSPACE}/${BUILD_DIR}/bin/tests")
+				}
+			}
+		}
+	}
+}
