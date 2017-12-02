@@ -35,8 +35,3 @@ set_target_properties(gtest       PROPERTIES FOLDER GoogleTest)
 set_target_properties(gtest_main  PROPERTIES FOLDER GoogleTest)
 set_target_properties(calc        PROPERTIES FOLDER library)
 set_target_properties(tests       PROPERTIES FOLDER executable)
-
-if (BUILD_SHARED_LIBS)
-  # fix linker error "class testing::internal::Mutex testing::internal::g_linked_ptr_mutex"
-  target_compile_definitions(tests       PUBLIC -DGTEST_LINKED_AS_SHARED_LIBRARY=1)
-endif (BUILD_SHARED_LIBS)

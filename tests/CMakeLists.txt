@@ -21,6 +21,13 @@ include_directories(${PROJECT_BINARY_DIR}/../src)
 # define sources files of an executable
 add_executable(${project_name} ${SRC})
 
+# use shared library version
+# this is required when using parameterized test
+if (BUILD_SHARED_LIBS)
+  # fix linker error "class testing::internal::Mutex testing::internal::g_linked_ptr_mutex"
+  target_compile_definitions(${project_name} PUBLIC -DGTEST_LINKED_AS_SHARED_LIBRARY=1)
+endif (BUILD_SHARED_LIBS)
+
 # link libraries
 target_link_libraries(${project_name} gtest)
 target_link_libraries(${project_name} gtest_main)
