@@ -23,8 +23,8 @@ pipeline  {
 		stage('Build-on') {
 			steps {
 				script {
-				    def	BUILD_DIR = "${env.WORKSPACE}/build-on"
-				    def BUILD_SHARED_LIBS = "1"
+					def	BUILD_DIR = "${env.WORKSPACE}/build-on"
+					def BUILD_SHARED_LIBS = "1"
 					dir("${BUILD_DIR}") {
 						deleteDir()
 					}
@@ -37,8 +37,8 @@ pipeline  {
 		stage('Build-off') {
 			steps {
 				script {
-				    def	BUILD_DIR = "${env.WORKSPACE}/build-off"
-				    def BUILD_SHARED_LIBS = "0"
+					def	BUILD_DIR = "${env.WORKSPACE}/build-off"
+					def BUILD_SHARED_LIBS = "0"
 					dir("${BUILD_DIR}") {
 						deleteDir()
 					}
@@ -51,15 +51,15 @@ pipeline  {
 		stage('Test-on') {
 			steps {
 				script {
-				    def	BUILD_DIR = "${env.WORKSPACE}/build-on"
+					def	BUILD_DIR = "${env.WORKSPACE}/build-on"
 					sh ("${BUILD_DIR}/bin/tests")
-                }
+				}
 			}
 		}
 		stage('Test-off') {
 			steps {
 				script {
-				    def	BUILD_DIR = "${env.WORKSPACE}/build-off"
+					def	BUILD_DIR = "${env.WORKSPACE}/build-off"
 					sh ("${BUILD_DIR}/bin/tests")
 				}
 			}
