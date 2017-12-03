@@ -35,11 +35,12 @@ pipeline  {
 			steps {
 				script {
 					def	BUILD_DIR = "${env.WORKSPACE}\\build-on"
+					def BUILD_SHARED_LIBS = "1"
 					bat ("echo ${BUILD_DIR}")
 					bat ("cd")
 					bat ("if exist ${BUILD_DIR} rmdir /s /q ${BUILD_DIR}")
 					bat ("mkdir ${BUILD_DIR}")
-					bat ("\"%cmake%\" -D BUILD_SHARED_LIBS=1 -B${BUILD_DIR} -H.")
+					bat ("\"%cmake%\" -D BUILD_SHARED_LIBS=${BUILD_SHARED_LIBS} -B${BUILD_DIR} -H${env.WORKSPACE}")
 					bat ("\"%devenv%\" ${BUILD_DIR}\\googletest-sample-cmake.sln /rebuild \"Release|Win32\"")
 				}
 			}
@@ -48,11 +49,12 @@ pipeline  {
 			steps {
 				script {
 					def	BUILD_DIR = "${env.WORKSPACE}\\build-off"
+					def BUILD_SHARED_LIBS = "0"
 					bat ("echo ${BUILD_DIR}")
 					bat ("cd")
 					bat ("if exist ${BUILD_DIR} rmdir /s /q ${BUILD_DIR}")
 					bat ("mkdir ${BUILD_DIR}")
-					bat ("\"%cmake%\" -D BUILD_SHARED_LIBS=0 -B${BUILD_DIR} -H.")
+					bat ("\"%cmake%\" -D BUILD_SHARED_LIBS=${BUILD_SHARED_LIBS} -B${BUILD_DIR} -H${env.WORKSPACE}")
 					bat ("\"%devenv%\" ${BUILD_DIR}\\googletest-sample-cmake.sln /rebuild \"Release|Win32\"")
 				}
 			}
