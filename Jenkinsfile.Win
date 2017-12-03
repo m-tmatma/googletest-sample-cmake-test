@@ -35,7 +35,7 @@ pipeline  {
 			steps {
 				script {
 					def	BUILD_DIR = "${env.WORKSPACE}\\build-on"
-				    def BUILD_SHARED_LIBS = "1"
+					def BUILD_SHARED_LIBS = "1"
 					bat ("echo ${BUILD_DIR}")
 					bat ("cd")
 					bat ("if exist ${BUILD_DIR} rmdir /s /q ${BUILD_DIR}")
@@ -49,7 +49,7 @@ pipeline  {
 			steps {
 				script {
 					def	BUILD_DIR = "${env.WORKSPACE}\\build-off"
-				    def BUILD_SHARED_LIBS = "0"
+					def BUILD_SHARED_LIBS = "0"
 					bat ("echo ${BUILD_DIR}")
 					bat ("cd")
 					bat ("if exist ${BUILD_DIR} rmdir /s /q ${BUILD_DIR}")
