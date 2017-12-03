@@ -24,11 +24,12 @@ pipeline  {
 			steps {
 				script {
 				    def	BUILD_DIR = "${env.WORKSPACE}/build-on"
+				    def BUILD_SHARED_LIBS = "1"
 					dir("${BUILD_DIR}") {
 						deleteDir()
 					}
 					sh ("mkdir ${BUILD_DIR}")
-					sh ("${cmake} -D BUILD_SHARED_LIBS=1 -B${BUILD_DIR} -H.")
+					sh ("${cmake} -D BUILD_SHARED_LIBS=${BUILD_SHARED_LIBS} -B${BUILD_DIR} -H${env.WORKSPACE}")
 					sh ("${make} -j 4 -C ${BUILD_DIR}")
 				}
 			}
@@ -37,11 +38,12 @@ pipeline  {
 			steps {
 				script {
 				    def	BUILD_DIR = "${env.WORKSPACE}/build-off"
+				    def BUILD_SHARED_LIBS = "0"
 					dir("${BUILD_DIR}") {
 						deleteDir()
 					}
 					sh ("mkdir ${BUILD_DIR}")
-					sh ("${cmake} -D BUILD_SHARED_LIBS=0 -B${BUILD_DIR} -H.")
+					sh ("${cmake} -D BUILD_SHARED_LIBS=${BUILD_SHARED_LIBS} -B${BUILD_DIR} -H${env.WORKSPACE}")
 					sh ("${make} -j 4 -C ${BUILD_DIR}")
 				}
 			}
