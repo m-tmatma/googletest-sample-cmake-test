@@ -5,11 +5,14 @@ include (../runtime.cmake)
 # define a variable of project name
 set( project_name tests)
 
+# use user-defined main()
+set(CUSTOM_MAIN OFF)
+
 # define a project name
 project (${project_name})
 
 # define a variable SRC with file GLOB
-file(GLOB SRC *.cpp *.h)
+file(GLOB SRC test*.cpp *.h)
 
 # add include directories
 include_directories(../googletest/googletest/include)
@@ -19,7 +22,11 @@ include_directories(../src)
 include_directories(${PROJECT_BINARY_DIR}/../src)
 
 # define sources files of an executable
-add_executable(${project_name} ${SRC})
+if (CUSTOM_MAIN)
+  add_executable(${project_name} ${SRC} main.cpp)
+else()
+  add_executable(${project_name} ${SRC})
+endif (CUSTOM_MAIN)
 
 # use shared library version
 # this is required when using parameterized test
@@ -35,5 +42,7 @@ endif (BUILD_SHARED_LIBS)
 
 # link libraries
 target_link_libraries(${project_name} gtest)
-target_link_libraries(${project_name} gtest_main)
+if (NOT CUSTOM_MAIN)
+  target_link_libraries(${project_name} gtest_main)
+endif (NOT CUSTOM_MAIN)
 target_link_libraries(${project_name} calc)
