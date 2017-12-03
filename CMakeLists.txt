@@ -23,7 +23,7 @@ add_subdirectory(src)
 add_subdirectory(tests)
 
 # set Startup Project
-set_property(DIRECTORY PROPERTY VS_STARTUP_PROJECT "tests" )
+set_property(DIRECTORY PROPERTY VS_STARTUP_PROJECT "tests-custom" )
 
 # turn on solution folder
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
@@ -34,4 +34,5 @@ set_target_properties(gmock_main  PROPERTIES FOLDER GoogleTest)
 set_target_properties(gtest       PROPERTIES FOLDER GoogleTest)
 set_target_properties(gtest_main  PROPERTIES FOLDER GoogleTest)
 set_target_properties(calc        PROPERTIES FOLDER library)
-set_target_properties(tests       PROPERTIES FOLDER executable)
+set_target_properties(tests-custom PROPERTIES FOLDER executable)
+set_target_properties(tests-shared PROPERTIES FOLDER executable)
