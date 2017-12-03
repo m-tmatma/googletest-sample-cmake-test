@@ -23,28 +23,44 @@ pipeline  {
 		stage('Build-on') {
 			steps {
 				script {
-					def BUILD_DIR = 'build-on'
+					def	BUILD_DIR = "${env.WORKSPACE}/build-on"
+					def BUILD_SHARED_LIBS = "1"
 					dir("${BUILD_DIR}") {
 						deleteDir()
 					}
 					sh ("mkdir ${BUILD_DIR}")
-					sh ("${cmake} -D BUILD_SHARED_LIBS=1 -B${WORKSPACE}/${BUILD_DIR} -H.")
-					sh ("${make} -j 4 -C ${WORKSPACE}/${BUILD_DIR}")
-					sh ("${WORKSPACE}/${BUILD_DIR}/bin/tests")
+					sh ("${cmake} -D BUILD_SHARED_LIBS=${BUILD_SHARED_LIBS} -B${BUILD_DIR} -H${env.WORKSPACE}")
+					sh ("${make} -j 4 -C ${BUILD_DIR}")
 				}
 			}
 		}
 		stage('Build-off') {
 			steps {
 				script {
-					def BUILD_DIR = 'build-off'
+					def	BUILD_DIR = "${env.WORKSPACE}/build-off"
+					def BUILD_SHARED_LIBS = "0"
 					dir("${BUILD_DIR}") {
 						deleteDir()
 					}
 					sh ("mkdir ${BUILD_DIR}")
-					sh ("${cmake} -D BUILD_SHARED_LIBS=0 -B${WORKSPACE}/${BUILD_DIR} -H.")
-					sh ("${make} -j 4 -C ${WORKSPACE}/${BUILD_DIR}")
-					sh ("${WORKSPACE}/${BUILD_DIR}/bin/tests")
+					sh ("${cmake} -D BUILD_SHARED_LIBS=${BUILD_SHARED_LIBS} -B${BUILD_DIR} -H${env.WORKSPACE}")
+					sh ("${make} -j 4 -C ${BUILD_DIR}")
+				}
+			}
+		}
+		stage('Test-on') {
+			steps {
+				script {
+					def	BUILD_DIR = "${env.WORKSPACE}/build-on"
+					sh ("${BUILD_DIR}/bin/tests")
+				}
+			}
+		}
+		stage('Test-off') {
+			steps {
+				script {
+					def	BUILD_DIR = "${env.WORKSPACE}/build-off"
+					sh ("${BUILD_DIR}/bin/tests")
 				}
 			}
 		}
