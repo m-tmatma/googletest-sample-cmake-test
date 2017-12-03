@@ -51,7 +51,7 @@ pipeline  {
 		stage('Test') {
 			steps {
 				script {
-					sh ("./run-tests.sh")
+					sh ("${BUILD_DIR}/run-tests.sh")
 				}
 			}
 		}
