@@ -8,6 +8,7 @@ pipeline  {
 		devenv = 'C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/Common7/IDE/devenv.com'
 	}
 	agent any
+	
 	stages {
 		stage('Checkout') {
 			steps {
@@ -43,23 +44,6 @@ pipeline  {
 			    }
 			}
 		}
-		stage('Test-on') {
-			steps {
-				script {
-				    def	BUILD_DIR = "${env.WORKSPACE}\\build-on"
-				    bat ("${BUILD_DIR}\\bin\\Release\\tests.exe")
-                }
-			}
-		}
-		stage('Archive-on') {
-			steps {
-				script {
-				    archiveArtifacts artifacts: "build-on/bin/Release/*.dll"
-				    archiveArtifacts artifacts: "build-on/bin/Release/*.exe"
-                }
-			}
-		}
-		
 		stage('Build-off') {
 			steps {
 				script {
@@ -73,6 +57,14 @@ pipeline  {
 			    }
 			}
 		}
+		stage('Test-on') {
+			steps {
+				script {
+				    def	BUILD_DIR = "${env.WORKSPACE}\\build-on"
+				    bat ("${BUILD_DIR}\\bin\\Release\\tests.exe")
+                }
+			}
+		}
 		stage('Test-off') {
 			steps {
 				script {
@@ -81,6 +73,14 @@ pipeline  {
                 }
 			}
 		}
+		stage('Archive-on') {
+			steps {
+				script {
+				    archiveArtifacts artifacts: "build-on/bin/Release/*.dll"
+				    archiveArtifacts artifacts: "build-on/bin/Release/*.exe"
+                }
+			}
+		}		
 		stage('Archive-off') {
 			steps {
 				script {
