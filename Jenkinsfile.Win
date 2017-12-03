@@ -59,19 +59,10 @@ pipeline  {
 				}
 			}
 		}
-		stage('Test-on') {
+		stage('Test') {
 			steps {
 				script {
-					def	BUILD_DIR = "${env.WORKSPACE}\\build-on"
-					bat ("${BUILD_DIR}\\bin\\Release\\tests.exe")
-				}
-			}
-		}
-		stage('Test-off') {
-			steps {
-				script {
-					def	BUILD_DIR = "${env.WORKSPACE}\\build-off"
-					bat ("${BUILD_DIR}\\bin\\Release\\tests.exe")
+					bat ("call ${env.WORKSPACE}\\run-tests.bat")
 				}
 			}
 		}
