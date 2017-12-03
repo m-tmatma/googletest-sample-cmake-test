@@ -17,14 +17,12 @@ or
 ## How to generate projects for Visual Studio
 
     > mkdir build-gtest-cmake
-    > cd    build-gtest-cmake
-    > cmake -G "Visual Studio 15 2017" ..\googletest-sample-cmake
+    > cmake -G "Visual Studio 15 2017" -Bbuild-gtest-cmake -H.
 
 ## How to generate projects for Xcode
 
     $ mkdir build-gtest-cmake
-    $ cd    build-gtest-cmake
-    $ cmake -G "Xcode" ../googletest-sample-cmake
+    $ cmake -G "Xcode" -Bbuild-gtest-cmake -H.
 
 # How to create CMakeLists.txt which is project file for cmake
 
