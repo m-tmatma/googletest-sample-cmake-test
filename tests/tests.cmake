@@ -1,18 +1,18 @@
-include (../../runtime.cmake)
+include(${CMAKE_SOURCE_DIR}/runtime.cmake)
 
 # define a variable SRC with file GLOB
-file(GLOB SRC ../test*.cpp ../*.h)
+file(GLOB SRC ${CMAKE_CURRENT_LIST_DIR}/test*.cpp ${CMAKE_CURRENT_LIST_DIR}/*.h)
 
 # add include directories
-include_directories(../../googletest/googletest/include)
-include_directories(../../src)
+include_directories(${googletest_SOURCE_DIR}/include)
+include_directories(${calc_SOURCE_DIR})
 
 # add include directory for ${project_name}_Export.h
-include_directories(${PROJECT_BINARY_DIR}/src)
+include_directories(${calc_BINARY_DIR})
 
 # define sources files of an executable
 if (CUSTOM_MAIN)
-  add_executable(${project_name} ${SRC} ../main.cpp)
+  add_executable(${project_name} ${SRC} ${CMAKE_CURRENT_LIST_DIR}/main.cpp)
 else()
   add_executable(${project_name} ${SRC})
 endif (CUSTOM_MAIN)
