@@ -7,6 +7,6 @@ compiler:
 
 # Build steps
 script:
-  - ./create-build.sh
-  - ./run-tests.sh
+  - /usr/bin/bash ./create-build.sh
+  - /usr/bin/bash ./run-tests.sh
 
