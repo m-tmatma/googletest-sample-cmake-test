@@ -1,9 +1,15 @@
 # Enable C++ support
 language: cpp
 
+os:
+  - linux
+  - os: osx
+    osx_image: xcode9.2
+
 # Compiler selection
 compiler:
   - gcc
+  - clang
 
 # Build steps
 script:
