@@ -1,0 +1,12 @@
+# Enable C++ support
+language: cpp
+
+# Compiler selection
+compiler:
+  - gcc
+
+# Build steps
+script:
+  - ./create-build.sh
+  - ./run-tests.sh
+
