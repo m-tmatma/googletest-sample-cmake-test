@@ -13,6 +13,6 @@ compiler:
 
 # Build steps
 script:
-  - bash create-build.sh
+  - bash ./create-build.sh
   - bash ./run-tests.sh
 
