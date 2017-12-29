@@ -2,11 +2,11 @@
 language: cpp
 
 os:
-  - os: osx
-    osx_image: xcode9.2
+  - linux
 
 # Compiler selection
 compiler:
+  - gcc
   - clang
 
 # Build steps
